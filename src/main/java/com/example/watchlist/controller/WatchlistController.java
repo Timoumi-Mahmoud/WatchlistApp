@@ -3,6 +3,7 @@ package com.example.watchlist.controller;
 import com.example.watchlist.entity.WatchlistItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.jws.Oneway;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -93,7 +95,21 @@ watchlistItems.clear();
         return null;
     }
     @PostMapping("/watchlistItemForm")
-    public ModelAndView submitWatchlistItemForm(WatchlistItem watchlistItem) {
+    public ModelAndView submitWatchlistItemForm(@Valid WatchlistItem watchlistItem, BindingResult bindingResult) {
+
+     if(bindingResult.hasErrors()){
+         return new ModelAndView("watchlistItemForm");
+     }
+if(itemAlreadyExists((watchlistItem.getTitle()))){
+    bindingResult.rejectValue("title", "", "This title already exists on your whatch list !");
+    return new ModelAndView("watchlistItemForm");
+
+}
+
+
+
+
+
 
         WatchlistItem existingItem = findWatchlistItemById(watchlistItem.getId());
 
@@ -114,7 +130,15 @@ watchlistItems.clear();
     }
 
 
+    private boolean itemAlreadyExists(String title) {
 
+        for (WatchlistItem watchlistItem : watchlistItems) {
+            if (watchlistItem.getTitle().equals(title)) {
+                return true;
+            }
+        }
+        return false;
+    }
 /*
    private  WatchlistItem findWatchlistItemById(Integer id){
         for(WatchlistItem watchlistItem : watchlistItems) {
