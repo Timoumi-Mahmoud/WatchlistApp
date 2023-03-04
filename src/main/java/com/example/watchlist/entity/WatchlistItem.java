@@ -1,22 +1,37 @@
 package com.example.watchlist.entity;
 
 
+import com.example.watchlist.annotations.GoodMovie;
+import com.example.watchlist.annotations.Priority;
+import com.example.watchlist.annotations.Raiting;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+@GoodMovie
 
 public class WatchlistItem {
 
+
+
     private Integer id;
 
+
+    @NotBlank( message="Please enter the title")
     private String title;
+    @Raiting
 
-    private String rating;
+    private Integer rating;
 
+
+
+    @Priority
     private String priority;
 
+    @Size(max=50,  message="Comment should be maximum 50 characters")
     private String comment;
 
     public static int index = 0;
@@ -25,7 +40,7 @@ public class WatchlistItem {
         this.id = index ++;
     }
 
-    public WatchlistItem(String title, String rating, String priority, String comment) {
+    public WatchlistItem(String title, Integer rating, String priority, String comment) {
         super();
         this.id = index ++;
         this.title = title;
@@ -50,11 +65,11 @@ public class WatchlistItem {
         this.title = title;
     }
 
-    public String getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
