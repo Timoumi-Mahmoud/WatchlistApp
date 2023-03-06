@@ -1,4 +1,4 @@
-package com.example.watchlist.annotations;
+package com.example.watchlist.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

@@ -1,6 +1,6 @@
-package com.example.watchlist.annotations;
+package com.example.watchlist.validation;
 
-import com.example.watchlist.entity.WatchlistItem;
+import com.example.watchlist.domain.WatchlistItem;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

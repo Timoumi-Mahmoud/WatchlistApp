@@ -1,13 +1,9 @@
-package com.example.watchlist.entity;
+package com.example.watchlist.domain;
 
 
-import com.example.watchlist.annotations.GoodMovie;
-import com.example.watchlist.annotations.Priority;
-import com.example.watchlist.annotations.Raiting;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.watchlist.validation.GoodMovie;
+import com.example.watchlist.validation.Priority;
+import com.example.watchlist.validation.Raiting;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -22,9 +18,9 @@ public class WatchlistItem {
 
     @NotBlank( message="Please enter the title")
     private String title;
-    @Raiting
+   /// @Raiting
 
-    private Integer rating;
+    private String rating;
 
 
 
@@ -40,7 +36,7 @@ public class WatchlistItem {
         this.id = index ++;
     }
 
-    public WatchlistItem(String title, Integer rating, String priority, String comment) {
+    public WatchlistItem(String title, String rating, String priority, String comment) {
         super();
         this.id = index ++;
         this.title = title;
@@ -65,11 +61,11 @@ public class WatchlistItem {
         this.title = title;
     }
 
-    public Integer getRating() {
+    public String  getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
